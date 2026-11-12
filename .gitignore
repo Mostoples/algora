@@ -17,3 +17,6 @@ output/dokumen/_*.png
 # kredensial
 tools/.sketchfab_token
 .env*
+
+# hasil build situs (python tools/make_site.py)
+site/
