@@ -105,6 +105,20 @@ function animateBubbles(mod, t) {
   b.geo.attributes.position.needsUpdate = true;
 }
 
+/* ---------------- theme ---------------- */
+const STAGES = [], THEME_HOOKS = [];
+function applyTheme(th) {
+  const light = th === "light";
+  STAGES.forEach(st => { st.scene.background = light ? null : new THREE.Color(0x050B16); st.bp.strength = st.bloom; st.bp.enabled = !light; });
+  M.edge.color.set(light ? 0x2c6fb4 : 0x9fe3ff); M.edge.opacity = light ? 0.7 : 0.55;
+  M.water.emissiveIntensity = light ? 0.05 : 0.32; M.water.color.set(light ? 0x0d9a52 : 0x0f8f55); M.water.opacity = light ? 0.96 : 0.88;
+  M.front.opacity = light ? 0.06 : 0.12; M.back.color.set(light ? 0x8f94cf : 0x5a5f9a);
+  M.ring.color.set(light ? 0x1f6fd0 : 0x2f8fd8); M.ring.opacity = light ? 0.75 : 0.55; M.ring.emissiveIntensity = light ? 0.05 : 0.35;
+  STAGES.forEach(st => { st.scene.environmentIntensity = light ? 0.55 : 0.35; });
+  THEME_HOOKS.forEach(f => f(light));
+}
+addEventListener("alg:theme", e => applyTheme(e.detail));
+
 /* ---------------- renderer factory ---------------- */
 function stage(canvas, { bloom = 0.9, fov = 35 } = {}) {
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true, powerPreference: "high-performance" });
@@ -117,6 +131,7 @@ function stage(canvas, { bloom = 0.9, fov = 35 } = {}) {
   const composer = new EffectComposer(renderer);
   composer.addPass(new RenderPass(scene, camera));
   const bp = new UnrealBloomPass(new THREE.Vector2(1, 1), bloom, 0.5, 0.62); composer.addPass(bp); composer.addPass(new OutputPass());
+  STAGES.push({ scene, bp, bloom });
   const resize = () => {
     const w = canvas.clientWidth, h = canvas.clientHeight; if (!w || !h) return;
     renderer.setSize(w, h, false); composer.setSize(w, h); camera.aspect = w / h; camera.updateProjectionMatrix();
@@ -148,7 +163,8 @@ function hero() {
   const sg = new THREE.BufferGeometry(), sp = new Float32Array(2400 * 3);
   for (let i = 0; i < sp.length; i++) sp[i] = (Math.random() - 0.5) * (i % 3 === 2 ? 40 : 60) - (i % 3 === 2 ? 15 : 0);
   sg.setAttribute("position", new THREE.BufferAttribute(sp, 3));
-  S.scene.add(new THREE.Points(sg, new THREE.PointsMaterial({ color: 0x9fb8ff, size: 0.04, transparent: true, opacity: 0.7 })));
+  const stars = new THREE.Points(sg, new THREE.PointsMaterial({ color: 0x9fb8ff, size: 0.04, transparent: true, opacity: 0.7 })); S.scene.add(stars);
+  THEME_HOOKS.push(light => { stars.visible = !light; });
   // CO2 particles drifting into the modules
   const N = mobile ? 260 : 520, cg = new THREE.BufferGeometry(), cp = new Float32Array(N * 3), cs = [];
   const spawn = i => { const a = Math.random() * Math.PI * 2, r = 6 + Math.random() * 6; cs[i] = { p: new THREE.Vector3(Math.cos(a) * r, (Math.random() - 0.5) * 9, Math.sin(a) * r * 0.6), tgt: mods[(Math.random() * 7) | 0], v: 0.6 + Math.random() * 0.9 }; };
@@ -156,6 +172,7 @@ function hero() {
   cg.setAttribute("position", new THREE.BufferAttribute(cp, 3));
   const co2 = new THREE.Points(cg, new THREE.PointsMaterial({ color: 0xffb547, size: 0.06, transparent: true, opacity: 0.9, depthWrite: false }));
   wall.add(co2);
+  THEME_HOOKS.push(light => co2.material.color.set(light ? 0xe08a00 : 0xffb547));
   let mx = 0, my = 0; addEventListener("pointermove", e => { mx = e.clientX / innerWidth - 0.5; my = e.clientY / innerHeight - 0.5; });
   const clock = new THREE.Clock(), tgt = new THREE.Vector3();
   return () => {
@@ -186,13 +203,14 @@ function exploded() {
   S.camera.position.set(0, 0, mobile ? 14 : 11.5);
   const labels = document.getElementById("labels");
   const L = [
-    ["A", "A · LEMBAR DEPAN · BENING 5 MM", P.A, new THREE.Vector3(R * 0.5, FLAT / 2, 0.2)],
-    ["C", "C1–C3 · CINCIN 10 MM · DINDING 11 MM", P.C1, new THREE.Vector3(R, 0, 0.1)],
-    ["W", "KULTUR CHLORELLA · ±1,7 L · 30 MM", P.W, new THREE.Vector3(-0.6, -0.4, 0.15)],
-    ["L", "STRIP LED · 31 × WS2812B", P.C2, new THREE.Vector3(-R * 0.5, FLAT / 2 + 0.03, 0)],
-    ["B", "B · LEMBAR BELAKANG · BURAM 5 MM", P.B, new THREE.Vector3(-R, 0, -0.2)],
-    ["G", "P1–P4 · CABLE GLAND PG9 / PG7", P.B, new THREE.Vector3(0.4, 1.25, -0.39)],
-  ].map(([k, txt, obj, local]) => { const el = document.createElement("div"); el.className = "lbl"; el.textContent = txt; labels.appendChild(el); return { k, el, obj, local }; });
+    ["A", ["A · LEMBAR DEPAN · BENING 5 MM", "A · FRONT SHEET · CLEAR 5 MM"], P.A, new THREE.Vector3(R * 0.5, FLAT / 2, 0.2)],
+    ["C", ["C1–C3 · CINCIN 10 MM · DINDING 11 MM", "C1–C3 · 10 MM RINGS · 11 MM WALL"], P.C1, new THREE.Vector3(R, 0, 0.1)],
+    ["W", ["KULTUR CHLORELLA · ±1,7 L · 30 MM", "CHLORELLA CULTURE · ~1.7 L · 30 MM"], P.W, new THREE.Vector3(-0.6, -0.4, 0.15)],
+    ["L", ["STRIP LED · 31 × WS2812B", "LED STRIP · 31 × WS2812B"], P.C2, new THREE.Vector3(-R * 0.5, FLAT / 2 + 0.03, 0)],
+    ["B", ["B · LEMBAR BELAKANG · BURAM 5 MM", "B · BACK SHEET · FROSTED 5 MM"], P.B, new THREE.Vector3(-R, 0, -0.2)],
+    ["G", ["P1–P4 · CABLE GLAND PG9 / PG7", "P1–P4 · PG9 / PG7 CABLE GLANDS"], P.B, new THREE.Vector3(0.4, 1.25, -0.39)],
+  ].map(([k, txt, obj, local]) => { const el = document.createElement("div"); el.className = "lbl"; labels.appendChild(el); return { k, el, obj, local, txt }; });
+  const setLbl = () => L.forEach(l => l.el.textContent = l.txt[ALG.lang === "en" ? 1 : 0]); setLbl(); addEventListener("alg:lang", setLbl);
   const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg"); svg.setAttribute("class", "lines"); labels.prepend(svg);
   const clock = new THREE.Clock(), v = new THREE.Vector3();
   return () => {
@@ -208,7 +226,7 @@ function exploded() {
     const sorted = [...L].sort((p, q) => p.ay - q.ay), gap = mobile ? 26 : 38, top0 = h / 2 - gap * (L.length - 1) / 2;
     sorted.forEach((l, i) => { l.ly = top0 + i * gap; });
     svg.setAttribute("viewBox", `0 0 ${w} ${h}`);
-    svg.innerHTML = show ? L.map(l => `<path d="M${l.ax} ${l.ay} L${lx - 30} ${l.ly} L${lx - 6} ${l.ly}" stroke="${ALG.focus === l.k ? "#2EE6A6" : "rgba(180,205,255,.45)"}" fill="none" stroke-width="1"/><circle cx="${l.ax}" cy="${l.ay}" r="3.5" fill="${ALG.focus === l.k ? "#2EE6A6" : "#9FE3FF"}"/>`).join("") : "";
+    svg.innerHTML = show ? L.map(l => `<path d="M${l.ax} ${l.ay} L${lx - 30} ${l.ly} L${lx - 6} ${l.ly}" stroke="${ALG.focus === l.k ? "#2EE6A6" : (ALG.theme === "light" ? "rgba(30,50,90,.4)" : "rgba(180,205,255,.45)")}" fill="none" stroke-width="1"/><circle cx="${l.ax}" cy="${l.ay}" r="3.5" fill="${ALG.focus === l.k ? "#2EE6A6" : (ALG.theme === "light" ? "#2c6fb4" : "#9FE3FF")}"/>`).join("") : "";
     L.forEach(l => {
       l.el.style.left = lx + "px"; l.el.style.top = l.ly + "px";
       l.el.classList.toggle("on", show); l.el.style.color = ALG.focus === l.k ? "#2EE6A6" : "";
@@ -236,7 +254,7 @@ function hive() {
 
 /* ---------------- run ---------------- */
 try {
-  const loops = [hero(), exploded(), hive()];
+  const loops = [hero(), exploded(), hive()]; applyTheme(ALG.theme || "dark");
   const loop = () => { loops.forEach(f => f()); requestAnimationFrame(loop); };
   loop();
 } catch (err) {

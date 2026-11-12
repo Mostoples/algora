@@ -1,15 +1,16 @@
 <!doctype html>
-<html lang="id">
+<html lang="id" data-theme="dark">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>ALGORA — Serap. Tumbuh. Bersinar.</title>
 <meta name="description" content="ALGORA: lampu hexagon modular berisi mikroalga yang menyerap CO₂, menghasilkan O₂, dan merawat dirinya sendiri dengan AIoT.">
-<meta property="og:title" content="ALGORA — Serap. Tumbuh. Bersinar.">
-<meta property="og:description" content="Fotobioreaktor mikroalga modular · lampu hidup · AIoT rawat-mandiri.">
+<meta property="og:title" content="ALGORA — Absorb. Grow. Glow.">
+<meta property="og:description" content="Modular microalgae photobioreactor lamp · living light · self-maintaining AIoT.">
 <meta property="og:image" content="media/og.jpg">
 <meta name="theme-color" content="#050B16">
 <link rel="icon" href="app/assets/img/module.png">
+<script>/* apply saved theme/language before paint */(function(){try{var t=localStorage.getItem("alg-theme");var l=localStorage.getItem("alg-lang")||((navigator.language||"").toLowerCase().indexOf("id")===0?"id":"en");if(t)document.documentElement.dataset.theme=t;document.documentElement.lang=l;}catch(e){}})();</script>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="site.css">
@@ -20,8 +21,15 @@
 
 <header class="nav">
   <a class="brand" href="#top"><svg viewBox="0 0 24 21"><polygon points="6,1 18,1 23,10.5 18,20 6,20 1,10.5"/></svg>ALGORA</a>
-  <nav class="links"><a href="#modul">Modul</a><a href="#builder">Susun</a><a href="#siklus">Siklus</a><a href="#aplikasi">Aplikasi</a><a href="#spesifikasi">Spesifikasi</a><a href="#galeri">Galeri</a></nav>
-  <a class="pill-btn" href="app/">Coba aplikasi</a>
+  <nav class="links"><a href="#modul" data-i18n="nav1">Modul</a><a href="#builder" data-i18n="nav2">Susun</a><a href="#siklus" data-i18n="nav3">Siklus</a><a href="#aplikasi" data-i18n="nav4">Aplikasi</a><a href="#spesifikasi" data-i18n="nav5">Spesifikasi</a><a href="#galeri" data-i18n="nav6">Galeri</a></nav>
+  <div class="tools">
+    <button class="icon-btn" id="langBtn" aria-label="Ganti bahasa / switch language"><span class="mono" id="langLbl">EN</span></button>
+    <button class="icon-btn" id="themeBtn" aria-label="Mode terang/gelap">
+      <svg class="sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.5"/><path d="M12 1.5v3M12 19.5v3M1.5 12h3M19.5 12h3M4.6 4.6l2.1 2.1M17.3 17.3l2.1 2.1M4.6 19.4l2.1-2.1M17.3 6.7l2.1-2.1"/></svg>
+      <svg class="moon" viewBox="0 0 24 24"><path d="M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5a8.5 8.5 0 1 0 11 11z"/></svg>
+    </button>
+    <a class="pill-btn" href="app/" data-i18n="try">Coba aplikasi</a>
+  </div>
 </header>
 
 <main id="top">
@@ -29,35 +37,35 @@
 <section class="hero">
   <canvas id="hero3d"></canvas>
   <div class="hero-copy">
-    <span class="tag"><i></i>ALGORA M1 · FOTOBIOREAKTOR MIKROALGA MODULAR</span>
-    <h1><span class="w">Serap.</span><span class="w">Tumbuh.</span><span class="w grad">Bersinar.</span></h1>
-    <p>Lampu hexagon modular berisi mikroalga <i>Chlorella</i> yang menyerap CO₂, menghasilkan O₂, dan merawat dirinya sendiri dengan sensor dan ESP32.</p>
-    <div class="row"><a class="btn primary" href="#modul">Jelajahi modul ↓</a><a class="btn ghost" href="app/">Coba aplikasi demo</a></div>
+    <span class="tag"><i></i><span data-i18n="h_tag">ALGORA M1 · FOTOBIOREAKTOR MIKROALGA MODULAR</span></span>
+    <h1><span class="w" data-i18n="h1a">Serap.</span><span class="w" data-i18n="h1b">Tumbuh.</span><span class="w grad" data-i18n="h1c">Bersinar.</span></h1>
+    <p data-i18n="h_p">Lampu hexagon modular berisi mikroalga <i>Chlorella</i> yang menyerap CO₂, menghasilkan O₂, dan merawat dirinya sendiri dengan sensor dan ESP32.</p>
+    <div class="row"><a class="btn primary" href="#modul" data-i18n="h_b1">Jelajahi modul ↓</a><a class="btn ghost" href="app/" data-i18n="h_b2">Coba aplikasi demo</a></div>
   </div>
-  <div class="ticker glass"><span class="mono">CO₂ RUANGAN · SIMULASI</span><b><span id="ppm">812</span> ppm</b><svg id="spark" viewBox="0 0 120 30"><polyline/></svg></div>
-  <div class="hero-specs mono"><div><span>MODUL</span><b>300 × 40 mm</b></div><div><span>KULTUR</span><b>1,7 L Chlorella</b></div><div><span>CAHAYA</span><b>31 LED · 16 jam</b></div></div>
+  <div class="ticker glass"><span class="mono" data-i18n="tick">CO₂ RUANGAN · SIMULASI</span><b><span id="ppm">812</span> ppm</b><svg id="spark" viewBox="0 0 120 30"><polyline/></svg></div>
+  <div class="hero-specs mono"><div><span data-i18n="hs1">MODUL</span><b>300 × 40 mm</b></div><div><span data-i18n="hs2">KULTUR</span><b data-i18n="hs2v">1,7 L Chlorella</b></div><div><span data-i18n="hs3">CAHAYA</span><b data-i18n="hs3v">31 LED · 16 jam</b></div></div>
   <div class="scroll-hint mono">SCROLL</div>
 </section>
 
-<div class="strip mono" aria-hidden="true"><div class="track">
+<div class="strip mono" aria-hidden="true"><div class="track" data-i18n="strip">
   <span>MENYERAP CO₂</span><b>◆</b><span>MENGHASILKAN O₂</span><b>◆</b><span>LAMPU RUANGAN 2-IN-1</span><b>◆</b><span>RAWAT-MANDIRI · ESP32</span><b>◆</b><span>DIPOTONG CNC · 5 LAPIS AKRILIK</span><b>◆</b><span>MODULAR SEPERTI SARANG LEBAH</span><b>◆</b>
   <span>MENYERAP CO₂</span><b>◆</b><span>MENGHASILKAN O₂</span><b>◆</b><span>LAMPU RUANGAN 2-IN-1</span><b>◆</b><span>RAWAT-MANDIRI · ESP32</span><b>◆</b><span>DIPOTONG CNC · 5 LAPIS AKRILIK</span><b>◆</b><span>MODULAR SEPERTI SARANG LEBAH</span><b>◆</b>
 </div></div>
 
 <!-- 02 PROBLEM -->
 <section class="sec problem" id="masalah">
-  <span class="tag"><i></i>02 · MASALAHNYA</span>
-  <h2 class="kinetic"><span>Ruangan kita</span><span class="ind">penuh <em class="warm">CO₂.</em></span><span>Tanaman butuh</span><span class="ind">tempat & <em class="grad">waktu.</em></span></h2>
+  <span class="tag"><i></i><span data-i18n="p_tag">02 · MASALAHNYA</span></span>
+  <h2 class="kinetic"><span data-i18n="k1">Ruangan kita</span><span class="ind" data-i18n="k2">penuh <em class="warm">CO₂.</em></span><span data-i18n="k3">Tanaman butuh</span><span class="ind" data-i18n="k4">tempat & <em class="grad">waktu.</em></span></h2>
   <div class="cards3">
-    <div class="card glass up"><b class="big" data-to="420">0</b><small>ppm</small><span class="mono k">CO₂ UDARA LUAR</span><p>Titik awal. Di kelas yang penuh dan ventilasinya kurang, kadar CO₂ naik jauh di atasnya.</p></div>
-    <div class="card glass up"><b class="big" data-to="1.83" data-dec="2">0</b><small>kg CO₂</small><span class="mono k">PER 1 KG BIOMASSA ALGA</span><p>Mikroalga mengikat CO₂ lebih efisien daripada tanaman darat karena tiap selnya bersentuhan langsung dengan air.</p></div>
-    <div class="card glass up"><b class="big" data-to="30">0</b><small>mm</small><span class="mono k">JALUR CAHAYA</span><p>Fotobioreaktor biasanya besar dan ada di laboratorium. ALGORA cukup setebal 4 cm dan menempel di dinding.</p></div>
+    <div class="card glass"><b class="big" data-to="420">0</b><small>ppm</small><span class="mono k" data-i18n="c1k">CO₂ UDARA LUAR</span><p data-i18n="c1p">Titik awal. Di kelas yang penuh dan ventilasinya kurang, kadar CO₂ naik jauh di atasnya.</p></div>
+    <div class="card glass"><b class="big" data-to="1.83" data-dec="2">0</b><small>kg CO₂</small><span class="mono k" data-i18n="c2k">PER 1 KG BIOMASSA ALGA</span><p data-i18n="c2p">Mikroalga mengikat CO₂ lebih efisien daripada tanaman darat karena tiap selnya bersentuhan langsung dengan air.</p></div>
+    <div class="card glass"><b class="big" data-to="30">0</b><small>mm</small><span class="mono k" data-i18n="c3k">JALUR CAHAYA</span><p data-i18n="c3p">Fotobioreaktor biasanya besar dan ada di laboratorium. ALGORA cukup setebal 4 cm dan menempel di dinding.</p></div>
   </div>
   <div class="facts">
-    <div><span class="mono">A</span><h4>Udara pengap</h4><p>Ventilasi ruang kelas dan rumah kecil sering terbatas.</p></div>
-    <div><span class="mono">B</span><h4>Perawatan terlupa</h4><p>Tanaman indoor mudah layu tanpa jadwal siram dan cahaya.</p></div>
-    <div><span class="mono">C</span><h4>Teknologi tertutup</h4><p>Fotobioreaktor jarang hadir sebagai benda sehari-hari.</p></div>
-    <div><span class="mono">D</span><h4>Energi lampu</h4><p>Lampu menyala tiap malam — kenapa tidak sekaligus menumbuhkan alga?</p></div>
+    <div><span class="mono">A</span><h4 data-i18n="f1h">Udara pengap</h4><p data-i18n="f1p">Ventilasi ruang kelas dan rumah kecil sering terbatas.</p></div>
+    <div><span class="mono">B</span><h4 data-i18n="f2h">Perawatan terlupa</h4><p data-i18n="f2p">Tanaman indoor mudah layu tanpa jadwal siram dan cahaya.</p></div>
+    <div><span class="mono">C</span><h4 data-i18n="f3h">Teknologi tertutup</h4><p data-i18n="f3p">Fotobioreaktor jarang hadir sebagai benda sehari-hari.</p></div>
+    <div><span class="mono">D</span><h4 data-i18n="f4h">Energi lampu</h4><p data-i18n="f4p">Lampu menyala tiap malam — kenapa tidak sekaligus menumbuhkan alga?</p></div>
   </div>
 </section>
 
@@ -66,15 +74,15 @@
   <div class="pin">
     <canvas id="ex3d"></canvas>
     <div class="ex-copy">
-      <span class="tag"><i></i>03 · ALGORA M1 · EXPLODED</span>
-      <h2>Lima lapis.<br><span class="grad">Satu ekosistem.</span></h2>
-      <p>Lembar depan bening, tiga cincin rangka 10 mm, dan lembar belakang buram — direkatkan silikon menjadi ruang kultur setebal 30 mm.</p>
+      <span class="tag"><i></i><span data-i18n="e_tag">03 · ALGORA M1 · EXPLODED</span></span>
+      <h2 data-i18n="e_h">Lima lapis.<br><span class="grad">Satu ekosistem.</span></h2>
+      <p data-i18n="e_p">Lembar depan bening, tiga cincin rangka 10 mm, dan lembar belakang buram — direkatkan silikon menjadi ruang kultur setebal 30 mm.</p>
       <ol class="parts mono" id="partlist">
-        <li data-k="A">01 · LEMBAR DEPAN A · BENING 5 MM</li><li data-k="C">02 · CINCIN C1–C3 · 3 × 10 MM, R4</li>
-        <li data-k="W">03 · KULTUR CHLORELLA · ±1,7 L</li><li data-k="L">04 · STRIP LED · 31 × WS2812B</li>
-        <li data-k="B">05 · LEMBAR BELAKANG B · BURAM 5 MM</li><li data-k="G">06 · CABLE GLAND P1–P4</li>
+        <li data-k="A" data-i18n="pA">01 · LEMBAR DEPAN A · BENING 5 MM</li><li data-k="C" data-i18n="pC">02 · CINCIN C1–C3 · 3 × 10 MM, R4</li>
+        <li data-k="W" data-i18n="pW">03 · KULTUR CHLORELLA · ±1,7 L</li><li data-k="L" data-i18n="pL">04 · STRIP LED · 31 × WS2812B</li>
+        <li data-k="B" data-i18n="pB">05 · LEMBAR BELAKANG B · BURAM 5 MM</li><li data-k="G" data-i18n="pG">06 · CABLE GLAND P1–P4</li>
       </ol>
-      <div class="ex-state mono"><span id="exstate">TERAKIT · 300 × 40 MM</span></div>
+      <div class="ex-state mono"><span id="exstate"></span></div>
     </div>
     <div id="labels"></div>
   </div>
@@ -83,18 +91,18 @@
 <!-- 04 BUILDER -->
 <section class="sec builder" id="builder">
   <div class="b-copy">
-    <span class="tag"><i></i>04 · MODULAR SEPERTI SARANG LEBAH</span>
-    <h2>Susun.<br>Sambung.<br><span class="grad">Bernapas.</span></h2>
-    <p>Setiap modul punya lampu sendiri; satu modul induk membawa otak ESP32 dan sensor. Tambah modul dan lihat angkanya berubah.</p>
+    <span class="tag"><i></i><span data-i18n="b_tag">04 · MODULAR SEPERTI SARANG LEBAH</span></span>
+    <h2 data-i18n="b_h">Susun.<br>Sambung.<br><span class="grad">Bernapas.</span></h2>
+    <p data-i18n="b_p">Setiap modul punya lampu sendiri; satu modul induk membawa otak ESP32 dan sensor. Tambah modul dan lihat angkanya berubah.</p>
     <div class="panel glass">
-      <div class="ctrl"><button id="minus" aria-label="kurangi">−</button><div><b id="nmod">7</b><span class="mono">MODUL</span></div><button id="plus" aria-label="tambah">+</button>
-        <div class="seg mono" id="modes"><button class="on" data-m="wall">DINDING</button><button data-m="lamp">LAMPU</button><button data-m="floor">LANTAI</button></div></div>
+      <div class="ctrl"><button id="minus" aria-label="−">−</button><div><b id="nmod">7</b><span class="mono" data-i18n="mods">MODUL</span></div><button id="plus" aria-label="+">+</button>
+        <div class="seg mono" id="modes"><button class="on" data-m="wall" data-i18n="mw">DINDING</button><button data-m="lamp" data-i18n="ml">LAMPU</button><button data-m="floor" data-i18n="mf">LANTAI</button></div></div>
       <div class="bar"><i id="nbar"></i></div>
       <div class="read">
-        <div><span class="mono">KULTUR</span><b id="rL">11,9 L</b></div><div><span class="mono">LED</span><b id="rLED">217</b></div>
-        <div><span class="mono">CO₂ / HARI*</span><b id="rCO2">1,9 g</b></div><div><span class="mono">DAYA RATA-RATA*</span><b id="rW">33 W</b></div>
+        <div><span class="mono" data-i18n="r1">KULTUR</span><b id="rL">11,9 L</b></div><div><span class="mono">LED</span><b id="rLED">217</b></div>
+        <div><span class="mono" data-i18n="r3">CO₂ / HARI*</span><b id="rCO2">1,9 g</b></div><div><span class="mono" data-i18n="r4">DAYA RATA-RATA*</span><b id="rW">36 W</b></div>
       </div>
-      <p class="fine mono">*Simulasi: puncak serapan 0,27 g CO₂/hari dan 5,2 W rata-rata per modul (laju tumbuh 0,35/hari).</p>
+      <p class="fine mono" data-i18n="b_fine">*Simulasi: puncak serapan 0,27 g CO₂/hari dan 5,2 W rata-rata per modul (laju tumbuh 0,35/hari).</p>
     </div>
   </div>
   <canvas id="hive3d"></canvas>
@@ -102,86 +110,87 @@
 
 <!-- 05 DAY CYCLE -->
 <section class="sec cycle" id="siklus">
-  <span class="tag"><i></i>05 · RAWAT-MANDIRI 24 JAM</span>
-  <h2 class="right">Siang menumbuhkan.<br><span class="grad">Malam menerangi.</span></h2>
+  <span class="tag"><i></i><span data-i18n="y_tag">05 · RAWAT-MANDIRI 24 JAM</span></span>
+  <h2 class="right" data-i18n="y_h">Siang menumbuhkan.<br><span class="grad">Malam menerangi.</span></h2>
   <div class="cyc glass">
-    <div class="clock"><svg viewBox="0 0 200 200" id="dial"></svg><div class="ctime"><b id="ctime">09:00</b><span class="mono" id="cmode">MODE TUMBUH</span></div></div>
+    <div class="clock"><svg viewBox="0 0 200 200" id="dial"></svg><div class="ctime"><b id="ctime">09:00</b><span class="mono" id="cmode"></span></div></div>
     <div class="cinfo">
-      <input type="range" id="hour" min="0" max="1439" value="540" aria-label="jam">
+      <input type="range" id="hour" min="0" max="1439" value="540" aria-label="jam / hour">
       <div class="states">
-        <div><span class="mono">LED</span><b id="sLED">Merah + biru</b></div><div><span class="mono">POMPA UDARA</span><b id="sAir">Nyala</b></div>
-        <div><span class="mono">NUTRISI</span><b id="sDose">08.00 · 3 detik</b></div><div><span class="mono">DAYA 12 V</span><b id="sP">8,5 W</b></div>
+        <div><span class="mono">LED</span><b id="sLED"></b></div><div><span class="mono" data-i18n="s2">POMPA UDARA</span><b id="sAir"></b></div>
+        <div><span class="mono" data-i18n="s3">NUTRISI</span><b id="sDose"></b></div><div><span class="mono" data-i18n="s4">DAYA 12 V</span><b id="sP"></b></div>
       </div>
       <ol class="steps">
-        <li><b>Baca sensor</b> suhu air, cahaya, kepadatan alga (OD), dan CO₂ setiap 60 detik.</li>
-        <li><b>Atur lampu</b> sesuai jam: tumbuh 06–18, ruangan 18–22, mati di malam hari.</li>
-        <li><b>Aerasi</b> 10 menit setiap 30 menit untuk mengaduk dan memasok CO₂.</li>
-        <li><b>Beri nutrisi</b> sekali sehari dan beri peringatan bila suhu keluar 20–32 °C.</li>
-        <li><b>Kirim data</b> JSON lewat Wi-Fi ke ponsel.</li>
+        <li data-i18n="st1"><b>Baca sensor</b> suhu air, cahaya, kepadatan alga (OD), dan CO₂ setiap 60 detik.</li>
+        <li data-i18n="st2"><b>Atur lampu</b> sesuai jam: tumbuh 06–18, ruangan 18–22, mati di malam hari.</li>
+        <li data-i18n="st3"><b>Aerasi</b> 10 menit setiap 30 menit untuk mengaduk dan memasok CO₂.</li>
+        <li data-i18n="st4"><b>Beri nutrisi</b> sekali sehari dan beri peringatan bila suhu keluar 20–32 °C.</li>
+        <li data-i18n="st5"><b>Kirim data</b> JSON lewat Wi-Fi ke ponsel.</li>
       </ol>
     </div>
   </div>
-  <p class="fine mono">Data daya dari simulasi logika firmware (rata-rata 5,2 W · 126 Wh/hari).</p>
+  <p class="fine mono" data-i18n="y_fine">Data daya dari simulasi logika firmware (rata-rata 5,2 W · 126 Wh/hari).</p>
 </section>
 
 <!-- 06 APP -->
 <section class="sec app" id="aplikasi">
   <div>
-    <span class="tag"><i></i>06 · APLIKASI</span>
-    <h2>Semua modul.<br><span class="grad">Satu genggaman.</span></h2>
-    <p>Pantau CO₂ terserap, kepadatan alga, cahaya, dan jadwal perawatan. Saat ini berjalan dalam mode demo dengan data simulasi.</p>
-    <a class="btn primary" href="app/">Buka aplikasi demo →</a>
+    <span class="tag"><i></i><span data-i18n="a_tag">06 · APLIKASI</span></span>
+    <h2 data-i18n="a_h">Semua modul.<br><span class="grad">Satu genggaman.</span></h2>
+    <p data-i18n="a_p">Pantau CO₂ terserap, kepadatan alga, cahaya, dan jadwal perawatan. Saat ini berjalan dalam mode demo dengan data simulasi.</p>
+    <a class="btn primary" href="app/" data-i18n="a_b">Buka aplikasi demo →</a>
   </div>
-  <div class="phones"><img src="media/app_hive.webp" class="ph a" alt="Layar modul"><img src="media/app_home.webp" class="ph b" alt="Layar beranda"><img src="media/app_care.webp" class="ph c" alt="Layar perawatan"></div>
+  <div class="phones"><img src="media/app_hive.webp" class="ph a" alt=""><img src="media/app_home.webp" class="ph b" alt=""><img src="media/app_care.webp" class="ph c" alt=""></div>
 </section>
 
 <!-- 07 SPECS -->
 <section class="sec specs" id="spesifikasi">
-  <span class="tag"><i></i>07 · SPESIFIKASI PROTOTIPE</span>
-  <h2>Presisi CNC.<br><span class="grad">Angka yang jujur.</span></h2>
+  <span class="tag"><i></i><span data-i18n="sp_tag">07 · SPESIFIKASI PROTOTIPE</span></span>
+  <h2 data-i18n="sp_h">Presisi CNC.<br><span class="grad">Angka yang jujur.</span></h2>
   <div class="tiles">
-    <div class="tile"><span class="mono">SISI DATAR</span><b>300 mm</b></div><div class="tile"><span class="mono">SUDUT KE SUDUT</span><b>346,4 mm</b></div>
-    <div class="tile"><span class="mono">TEBAL</span><b>40 mm</b><small>5 + 3×10 + 5</small></div><div class="tile"><span class="mono">RUANG KULTUR</span><b>2,0 L</b><small>diisi ±1,7 L</small></div>
-    <div class="tile"><span class="mono">MASSA TERISI</span><b>±3,1 kg</b></div><div class="tile"><span class="mono">SUDUT DALAM</span><b>R4</b><small>pahat CNC</small></div>
-    <div class="tile"><span class="mono">JALUR POTONG</span><b>8,24 m</b><small>±37 menit</small></div><div class="tile"><span class="mono">PENGENDALI</span><b>ESP32</b><small>Wi-Fi 2,4 GHz</small></div>
-    <div class="tile"><span class="mono">SENSOR</span><b>4</b><small>suhu · lux · OD · CO₂</small></div><div class="tile"><span class="mono">DAYA</span><b>5,2 W*</b><small>maks 9,1 W</small></div>
-    <div class="tile"><span class="mono">BIOMASSA 14 HARI*</span><b>0,46–0,98</b><small>g/L</small></div><div class="tile"><span class="mono">KOTAK 60 L · 2 JAM*</span><b>−190–460</b><small>ppm CO₂ (kontrol −10)</small></div>
+    <div class="tile"><span class="mono" data-i18n="t1">SISI DATAR</span><b>300 mm</b></div><div class="tile"><span class="mono" data-i18n="t2">SUDUT KE SUDUT</span><b data-i18n="t2v">346,4 mm</b></div>
+    <div class="tile"><span class="mono" data-i18n="t3">TEBAL</span><b>40 mm</b><small>5 + 3×10 + 5</small></div><div class="tile"><span class="mono" data-i18n="t4">RUANG KULTUR</span><b data-i18n="t4v">2,0 L</b><small data-i18n="t4s">diisi ±1,7 L</small></div>
+    <div class="tile"><span class="mono" data-i18n="t5">MASSA TERISI</span><b data-i18n="t5v">±3,1 kg</b></div><div class="tile"><span class="mono" data-i18n="t6">SUDUT DALAM</span><b>R4</b><small data-i18n="t6s">pahat CNC</small></div>
+    <div class="tile"><span class="mono" data-i18n="t7">JALUR POTONG</span><b data-i18n="t7v">8,24 m</b><small data-i18n="t7s">±37 menit</small></div><div class="tile"><span class="mono" data-i18n="t8">PENGENDALI</span><b>ESP32</b><small>Wi-Fi 2,4 GHz</small></div>
+    <div class="tile"><span class="mono">SENSOR</span><b>4</b><small data-i18n="t9s">suhu · lux · OD · CO₂</small></div><div class="tile"><span class="mono" data-i18n="t10">DAYA</span><b data-i18n="t10v">5,2 W*</b><small data-i18n="t10s">maks 9,1 W</small></div>
+    <div class="tile"><span class="mono" data-i18n="t11">BIOMASSA 14 HARI*</span><b data-i18n="t11v">0,46–0,98</b><small>g/L</small></div><div class="tile"><span class="mono" data-i18n="t12">KOTAK 60 L · 2 JAM*</span><b>−190–460</b><small data-i18n="t12s">ppm CO₂ (kontrol −10)</small></div>
   </div>
-  <p class="fine mono">*Hasil perhitungan & simulasi berasumsi; uji fisik adalah tahap berikutnya.</p>
+  <p class="fine mono" data-i18n="sp_fine">*Hasil perhitungan & simulasi berasumsi; uji fisik adalah tahap berikutnya.</p>
 </section>
 
 <!-- 08 GALLERY -->
 <section class="sec gallery" id="galeri">
-  <span class="tag"><i></i>08 · GAMBAR & RENDER</span>
-  <h2>Dari DXF<br><span class="grad">sampai dinding.</span></h2>
-  <div class="tabs mono" id="gtabs"><button class="on" data-g="draw">GAMBAR TEKNIK</button><button data-g="render">RENDER 3D</button></div>
+  <span class="tag"><i></i><span data-i18n="g_tag">08 · GAMBAR & RENDER</span></span>
+  <h2 data-i18n="g_h">Dari DXF<br><span class="grad">sampai dinding.</span></h2>
+  <div class="tabs mono" id="gtabs"><button class="on" data-g="draw" data-i18n="g1">GAMBAR TEKNIK</button><button data-g="render" data-i18n="g2">RENDER 3D</button></div>
   <div class="grid" id="ggrid"></div>
 </section>
 
 <!-- 09 VIDEO -->
 <section class="sec video" id="video">
   <span class="tag"><i></i>09 · VIDEO</span>
-  <h2>Lihat ALGORA<br><span class="grad">bekerja.</span></h2>
+  <h2 data-i18n="v_h">Lihat ALGORA<br><span class="grad">bekerja.</span></h2>
   <div class="vids">
-    <figure><video controls preload="none" playsinline poster="media/showreel.jpg"><source src="media/showreel.mp4" type="video/mp4"></video><figcaption class="mono">SHOWREEL · 60 DETIK</figcaption></figure>
-    <figure><video controls preload="none" playsinline poster="media/tech.jpg"><source src="media/tech.mp4" type="video/mp4"></video><figcaption class="mono">GAMBAR TEKNIK 3D · EXPLODED · 360° · CLOSE-UP</figcaption></figure>
+    <figure><video controls preload="none" playsinline poster="media/showreel.jpg"><source src="media/showreel.mp4" type="video/mp4"></video><figcaption class="mono" data-i18n="v1">SHOWREEL · 60 DETIK</figcaption></figure>
+    <figure><video controls preload="none" playsinline poster="media/tech.jpg"><source src="media/tech.mp4" type="video/mp4"></video><figcaption class="mono" data-i18n="v2">GAMBAR TEKNIK 3D · EXPLODED · 360° · CLOSE-UP</figcaption></figure>
   </div>
 </section>
 
 <!-- 10 CTA -->
 <section class="cta-end" id="unduh">
-  <h2>Udara bersih,<br><span class="grad">satu hexagon sekali.</span></h2>
-  <p>Dibuat oleh tim siswa SMP Muhammadiyah Program Khusus (PK) Kottabarat Surakarta, didampingi Mersif Academy, untuk kompetisi I2ASPO 2026.</p>
-  <div class="row center"><a class="btn primary" href="app/">Coba aplikasi</a><a class="btn ghost" href="downloads/Algora_Gambar_Teknik.pdf">Gambar teknik (PDF)</a><a class="btn ghost" href="downloads/Algora_Dokumen_Teknis.pdf">Dokumen teknis (PDF)</a><a class="btn ghost" href="https://github.com/Mostoples/algora">GitHub</a></div>
+  <h2 data-i18n="z_h">Udara bersih,<br><span class="grad">satu hexagon sekali.</span></h2>
+  <p data-i18n="z_p">Dibuat oleh tim siswa SMP Muhammadiyah Program Khusus (PK) Kottabarat Surakarta, didampingi Mersif Academy, untuk kompetisi I2ASPO 2026.</p>
+  <div class="row center"><a class="btn primary" href="app/" data-i18n="try">Coba aplikasi</a><a class="btn ghost" href="downloads/Algora_Gambar_Teknik.pdf" data-i18n="z_d1">Gambar teknik (PDF)</a><a class="btn ghost" href="downloads/Algora_Dokumen_Teknis.pdf" data-i18n="z_d2">Dokumen teknis (PDF)</a><a class="btn ghost" href="https://github.com/Mostoples/algora">GitHub</a></div>
 </section>
 </main>
 
-<footer class="foot mono"><span>ALGORA · MODULAR · HIDUP · RAWAT-MANDIRI</span><span>© 2026 TIM ALGORA · RENDER: SKETCHFAB CC-BY, MAKEHUMAN CC0</span></footer>
+<footer class="foot mono"><span data-i18n="ft1">ALGORA · MODULAR · HIDUP · RAWAT-MANDIRI</span><span data-i18n="ft2">© 2026 TIM ALGORA · RENDER: SKETCHFAB CC-BY, MAKEHUMAN CC0</span></footer>
 <div id="lightbox"><img alt=""><span class="mono"></span></div>
 
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script src="i18n.js"></script>
 <script src="app.js"></script>
 <script type="module" src="scene.js"></script>
 </body>
