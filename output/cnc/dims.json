@@ -1,0 +1,45 @@
+{
+ "FLAT": 300.0,
+ "FLAT_IN": 278.0,
+ "WALL": 11.0,
+ "R_IN_FILLET": 4.0,
+ "T_SHEET": 5.0,
+ "T_RING": 10.0,
+ "N_RING": 3,
+ "THICK": 40.0,
+ "WATER_Y": 105.0,
+ "HOLES": [
+  {
+   "code": "P1",
+   "fn": "Isi air + ventilasi",
+   "d": 15.2,
+   "x": 0.0,
+   "y": 125.0,
+   "isi": "Cable gland PG9"
+  },
+  {
+   "code": "P2",
+   "fn": "Selang udara masuk",
+   "d": 12.5,
+   "x": -40.0,
+   "y": 125.0,
+   "isi": "Cable gland PG7"
+  },
+  {
+   "code": "P3",
+   "fn": "Kabel sensor suhu",
+   "d": 12.5,
+   "x": 40.0,
+   "y": 125.0,
+   "isi": "Cable gland PG7"
+  },
+  {
+   "code": "P4",
+   "fn": "Kuras / panen",
+   "d": 12.5,
+   "x": 0.0,
+   "y": -125.0,
+   "isi": "Cable gland PG7 + selang + klem"
+  }
+ ]
+}

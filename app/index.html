@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#E9EFF7">
+<title>Algora</title>
+<meta name="description" content="Algora — modular hexagon microalgae photobioreactor lamp with a self-maintaining AIoT system.">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="assets/img/module.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="phone" id="phone">
+
+  <!-- splash -->
+  <div class="splash" id="splash">
+    <img src="assets/img/module.png" alt="">
+    <h1><span>Algo</span><span class="alg">ra</span></h1>
+    <p class="muted" data-t="tagline"></p>
+  </div>
+
+  <div class="toast" id="toast"><img src="assets/img/ic_leaf.png" alt=""><span></span></div>
+
+  <div class="screens">
+  <!-- ============ 01 HOME ============ -->
+  <section class="screen active" id="s-home">
+    <div class="topbar">
+      <div class="brand"><div class="logo"><img src="assets/img/module.png" width="30" alt=""></div>Algora</div>
+      <div class="row" style="gap:10px">
+        <button class="icon-btn lang" id="langBtn">EN</button>
+        <button class="icon-btn" data-go="ai"><svg class="i" viewBox="0 0 24 24"><path d="M6 8a6 6 0 1 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg><span class="dot"></span></button>
+      </div>
+    </div>
+    <span class="chip-label"><i></i><span data-t="c_home"></span></span>
+    <h1><span data-t="h_home1"></span><br><span class="alg" data-t="h_home2"></span></h1>
+    <p class="lead" data-t="d_home"></p>
+
+    <div class="card hero" style="margin-top:18px">
+      <div class="aura-orb" style="width:220px;height:220px;left:-40px;top:-30px;background:#8CE3B0"></div>
+      <div class="aura-orb" style="width:180px;height:180px;right:-40px;bottom:-60px;background:#8CC6FF"></div>
+      <div class="hero-prod" style="position:relative">
+        <img src="assets/img/hero_cluster.png" alt="Algora modules">
+        <div>
+          <div class="muted" data-t="co2_today"></div>
+          <div class="kpi-big"><span id="kCO2">0</span><small>g CO₂</small></div>
+          <div class="muted" style="margin-top:12px" data-t="o2_today"></div>
+          <div class="kpi-big" style="font-size:26px"><span id="kO2">0</span><small>g O₂</small></div>
+          <div class="pills" style="margin-top:12px"><span class="pill ok"><b></b><span id="kMods">0</span><span data-t="modules"></span></span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sec-h"><h2 data-t="mode_title"></h2><span class="muted" data-t="mode_hint"></span></div>
+    <div class="modes" id="modes">
+      <button class="mode on" data-mode="wall"><img src="assets/img/m_wall.png" alt=""><span data-t="m_wall"></span></button>
+      <button class="mode" data-mode="floor"><img src="assets/img/m_floor.png" alt=""><span data-t="m_floor"></span></button>
+      <button class="mode" data-mode="lamp"><img src="assets/img/m_lamp.png" alt=""><span data-t="m_lamp"></span></button>
+      <button class="mode" data-mode="roof"><img src="assets/img/m_roof.png" alt=""><span data-t="m_roof"></span></button>
+    </div>
+
+    <div class="card" style="margin-top:18px">
+      <div class="row" style="gap:18px">
+        <div class="gauge" id="gScore"></div>
+        <div style="flex:1">
+          <h2 data-t="bio_title"></h2>
+          <p class="lead" style="font-size:12.5px;margin-top:4px" data-t="bio_desc"></p>
+          <div class="pills" style="margin-top:10px"><span class="pill alg"><b></b><span data-t="growing"></span></span><span class="pill blue"><b></b>AI</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sec-h"><h2 data-t="live"></h2><a href="#" data-go="hive" data-t="see_all"></a></div>
+    <div class="grid2" id="sensors"></div>
+  </section>
+
+  <!-- ============ 02 HIVE / MODULES ============ -->
+  <section class="screen" id="s-hive">
+    <span class="chip-label"><i></i><span data-t="c_hive"></span></span>
+    <h1><span data-t="h_hive1"></span><br><span class="l2" data-t="h_hive2"></span></h1>
+    <p class="lead" data-t="d_hive"></p>
+    <div class="card hero" style="margin-top:18px;padding:12px">
+      <div class="hive-wrap"><svg id="hive" viewBox="-200 -170 400 340"></svg></div>
+      <div class="legend" style="margin:6px 6px 4px">
+        <span><i style="background:#2FB86A"></i><span data-t="lg_ok"></span></span>
+        <span><i style="background:#F5A524"></i><span data-t="lg_harvest"></span></span>
+        <span><i style="background:#8CC6FF"></i><span data-t="lg_new"></span></span>
+      </div>
+    </div>
+    <div class="grid2" style="margin-top:18px">
+      <button class="btn btn-primary block" id="addMod"><svg class="i" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg><span data-t="add_mod"></span></button>
+      <button class="btn block" id="scanMod"><svg class="i" viewBox="0 0 24 24"><path d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2M7 12h10"/></svg><span data-t="scan"></span></button>
+    </div>
+    <div class="card" style="margin-top:18px">
+      <h2 data-t="snap_title"></h2>
+      <div class="tl" style="margin-top:14px">
+        <div class="st done"><span class="n">1</span><h3 data-t="snap1"></h3><p data-t="snap1d"></p></div>
+        <div class="st done"><span class="n">2</span><h3 data-t="snap2"></h3><p data-t="snap2d"></p></div>
+        <div class="st done"><span class="n">3</span><h3 data-t="snap3"></h3><p data-t="snap3d"></p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 03 LIGHT ============ -->
+  <section class="screen" id="s-light">
+    <span class="chip-label"><i></i><span data-t="c_light"></span></span>
+    <h1><span data-t="h_light1"></span><br><span class="l2" data-t="h_light2"></span></h1>
+    <p class="lead" data-t="d_light"></p>
+    <div class="card hero" style="margin-top:18px">
+      <div class="dial" id="dial">
+        <div class="ring"></div>
+        <svg viewBox="0 0 220 220" width="220" height="220"><defs><linearGradient id="dg" x1="0" x2="1"><stop offset="0" stop-color="#FFC46B"/><stop offset=".5" stop-color="#FFFFFF"/><stop offset="1" stop-color="#8CC6FF"/></linearGradient></defs>
+          <circle cx="110" cy="110" r="94" fill="none" stroke="url(#dg)" stroke-width="10" stroke-linecap="round" stroke-dasharray="443 1000" id="dialArc"/></svg>
+        <div class="face"><div><b id="dialV">4000</b><span>KELVIN</span></div></div>
+      </div>
+      <div class="between" style="margin-top:8px"><span class="muted" data-t="warm"></span><span class="muted" data-t="cool"></span></div>
+      <input type="range" class="range" id="cct" min="2700" max="6500" value="4000" style="margin-top:8px">
+      <div class="between" style="margin-top:18px"><h3 data-t="bright"></h3><b id="briV">72%</b></div>
+      <input type="range" class="range" id="bri" min="0" max="100" value="72" style="margin-top:10px">
+    </div>
+    <div class="sec-h"><h2 data-t="scenes"></h2></div>
+    <div class="scenes" id="scenes">
+      <button class="scene on" data-k="4000" data-b="72"><i style="background:#fff;color:#BFD8FF"></i><span data-t="sc_focus"></span></button>
+      <button class="scene" data-k="2900" data-b="45"><i style="background:#FFD9A0;color:#FFC46B"></i><span data-t="sc_relax"></span></button>
+      <button class="scene" data-k="6500" data-b="100"><i style="background:#D7F7E4;color:#43D17E"></i><span data-t="sc_grow"></span></button>
+      <button class="scene" data-k="2700" data-b="8"><i style="background:#8392AE;color:#4A5A7A"></i><span data-t="sc_night"></span></button>
+    </div>
+    <div class="card" style="margin-top:18px">
+      <div class="li"><div class="ic"><img src="assets/img/ic_leaf.png" alt=""></div><div class="t"><h3 data-t="photo"></h3><p data-t="photo_d"></p></div><button class="toggle on" data-tg></button></div>
+      <div class="li"><div class="ic"><img src="assets/img/ic_ai.png" alt=""></div><div class="t"><h3 data-t="circ"></h3><p data-t="circ_d"></p></div><button class="toggle on" data-tg></button></div>
+      <div class="li"><div class="ic"><img src="assets/img/ic_bolt.png" alt=""></div><div class="t"><h3 data-t="presence"></h3><p data-t="presence_d"></p></div><button class="toggle" data-tg></button></div>
+    </div>
+  </section>
+
+  <!-- ============ 04 SELF-CARE ============ -->
+  <section class="screen" id="s-care">
+    <span class="chip-label"><i></i><span data-t="c_care"></span></span>
+    <h1><span data-t="h_care1"></span><br><span class="alg" data-t="h_care2"></span></h1>
+    <p class="lead" data-t="d_care"></p>
+    <div class="grid3" style="margin-top:18px">
+      <div class="card sm"><div class="tank"><i id="tNut" style="background:linear-gradient(#8CC6FF,#2F7BFF)"></i><b id="tNutV">78%</b></div><p class="muted" style="margin-top:8px;text-align:center" data-t="t_nut"></p></div>
+      <div class="card sm"><div class="tank"><i id="tWat" style="background:linear-gradient(#DDEBFF,#8CC6FF)"></i><b id="tWatV">64%</b></div><p class="muted" style="margin-top:8px;text-align:center" data-t="t_water"></p></div>
+      <div class="card sm"><div class="tank"><i id="tHar" style="background:linear-gradient(#7DFFA0,#0E8F55)"></i><b id="tHarV">41%</b></div><p class="muted" style="margin-top:8px;text-align:center" data-t="t_harv"></p></div>
+    </div>
+    <div class="card" style="margin-top:18px">
+      <div class="between"><h2 data-t="today"></h2><span class="pill ok"><b></b>AUTO</span></div>
+      <div class="tl" style="margin-top:16px" id="careTL"></div>
+    </div>
+    <button class="btn btn-alg block" style="margin-top:18px" id="harvestBtn"><img src="assets/img/ic_leaf.png" width="26" alt=""><span data-t="harvest_now"></span></button>
+  </section>
+
+  <!-- ============ 05 AI ============ -->
+  <section class="screen" id="s-ai">
+    <span class="chip-label"><i></i><span data-t="c_ai"></span></span>
+    <h1><span data-t="h_ai1"></span><br><span class="l2" data-t="h_ai2"></span></h1>
+    <p class="lead" data-t="d_ai"></p>
+    <div class="card hero chart" style="margin-top:18px">
+      <div class="between"><h2 data-t="forecast"></h2><span class="pill blue"><b></b>7d</span></div>
+      <svg id="chart" viewBox="0 0 340 170" preserveAspectRatio="none"></svg>
+      <div class="legend" style="margin-top:6px"><span><i style="background:#2FB86A"></i><span data-t="lg_od"></span></span><span><i style="background:#2F7BFF"></i><span data-t="lg_pred"></span></span></div>
+    </div>
+    <div class="grid2" style="margin-top:16px">
+      <div class="card sm sensor"><div class="ic"><img src="assets/img/ic_leaf.png" alt=""></div><div class="v" id="aiHarv">2.4<small data-t="days"></small></div><p class="muted" data-t="next_harv"></p></div>
+      <div class="card sm sensor"><div class="ic"><img src="assets/img/ic_co2.png" alt=""></div><div class="v" id="aiYear">38<small>kg</small></div><p class="muted" data-t="co2_year"></p></div>
+    </div>
+    <div class="sec-h"><h2 data-t="insights"></h2></div>
+    <div class="card" id="insights"></div>
+  </section>
+  </div>
+
+  <!-- bottom nav -->
+  <nav class="nav" id="nav">
+    <button data-go="home" class="on"><span class="b"><svg class="i" viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg></span><span data-t="n_home"></span></button>
+    <button data-go="hive"><span class="b"><svg class="i" viewBox="0 0 24 24"><path d="M12 2.5 20.2 7.2v9.6L12 21.5 3.8 16.8V7.2z"/><path d="M12 8.5 15 10.2v3.6L12 15.5 9 13.8v-3.6z"/></svg></span><span data-t="n_hive"></span></button>
+    <button data-go="light"><span class="b"><svg class="i" viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2V16h5v-.1c0-.8.4-1.5 1-2A6 6 0 0 0 12 3z"/></svg></span><span data-t="n_light"></span></button>
+    <button data-go="care"><span class="b"><svg class="i" viewBox="0 0 24 24"><path d="M12 2.7C8 7.5 6 10.8 6 14a6 6 0 0 0 12 0c0-3.2-2-6.5-6-11.3z"/><path d="m9.5 14.5 1.8 1.8 3.5-3.6"/></svg></span><span data-t="n_care"></span></button>
+    <button data-go="ai"><span class="b"><svg class="i" viewBox="0 0 24 24"><rect x="5" y="7" width="14" height="12" rx="3"/><path d="M12 3v4M9 12h.01M15 12h.01M9.5 15.5h5M2.5 12h2.5M19 12h2.5"/></svg></span><span>AI</span></button>
+  </nav>
+
+  <!-- module sheet -->
+  <div class="scrim" id="scrim"></div>
+  <div class="sheet" id="sheet">
+    <div class="grab"></div>
+    <div class="between"><div><span class="chip-label"><i></i><span id="shId">A-01</span></span><h1 style="font-size:22px;margin-top:10px" id="shTitle"></h1></div>
+      <img src="assets/img/module.png" width="96" alt=""></div>
+    <div class="grid2" style="margin-top:12px" id="shSensors"></div>
+    <div class="card" style="margin-top:16px">
+      <div class="li"><div class="ic"><img src="assets/img/ic_bolt.png" alt=""></div><div class="t"><h3 data-t="link"></h3><p id="shLink"></p></div><span class="pill ok"><b></b>6/6</span></div>
+      <div class="li"><div class="ic"><img src="assets/img/ic_drop.png" alt=""></div><div class="t"><h3 data-t="flow"></h3><p id="shFlow"></p></div><span class="pill blue"><b></b>OK</span></div>
+    </div>
+    <button class="btn btn-primary block" style="margin-top:16px" id="shClose" data-t="close"></button>
+  </div>
+</div>
+<script src="js/app.js"></script>
+</body>
+</html>

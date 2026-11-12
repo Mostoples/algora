@@ -1,0 +1,12 @@
+import sys, os, math; sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from lib import *
+reset(); setup((640, 900), 32)
+world_color("#E6ECF4", 1.0)
+base, rig = make_human()
+print("RIG", rig.name, len(rig.pose.bones), [b for b in rig.pose.bones.keys() if "ik" in b][:12])
+print("hand", bone_world(rig, "hand_ik.R"), "head", bone_world(rig, "head") if "head" in rig.pose.bones else None)
+place_bone(rig, "hand_ik.R", bone_world(rig, "hand_ik.R") + Vector((0.1, -0.35, 0.65)))
+box(6, 6, 0.01, mat("floor", BG, 0.6), (0, 0, -0.005))
+area("key", (2, -3, 3), 600, 2)
+camera((0.6, -4.2, 1.1), (0, 0, 0.95), 50)
+render_still(os.path.join(sys.argv[-1], "t_human.png"))

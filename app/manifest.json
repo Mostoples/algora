@@ -1,0 +1,3 @@
+{"name":"Algora","short_name":"Algora","start_url":"./index.html","display":"standalone","background_color":"#E9EFF7","theme_color":"#E9EFF7",
+ "description":"Modular hexagon microalgae photobioreactor lamp · AIoT",
+ "icons":[{"src":"assets/img/icon512.png","sizes":"512x512","type":"image/png","purpose":"any maskable"}]}

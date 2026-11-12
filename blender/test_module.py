@@ -1,0 +1,10 @@
+import sys, os, math; sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from lib import *
+reset(); setup((960, 640), 48, look="AgX - Medium High Contrast")
+world_color("#E6ECF4", 0.8)
+honeycomb(hex_ring(1), prefix="A")
+floor = box(6, 6, 0.01, mat("floor", BG, 0.6), (0, 0, -0.03))
+area("key", (1.2, -1.2, 1.6), 120, 1.2)
+area("rim", (-1.2, 1.0, 0.8), 60, 1.0, "#CFE3FF")
+camera((0.75, -0.95, 0.75), (0, 0, 0), 50)
+render_still(os.path.join(sys.argv[-1], "t_module.png"))

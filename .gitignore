@@ -1,0 +1,19 @@
+# hasil render besar & cache
+output/frames/
+output/test/
+output/test_frames/
+output/*.mp4
+output/*.log
+showreel/build/
+__pycache__/
+*.pyc
+.firebase/
+# model 3D unduhan (lisensi pihak ketiga)
+assets/sketchfab/
+# file sementara
+output/dokumen/_*.png
+~$*
+
+# kredensial
+tools/.sketchfab_token
+.env*
